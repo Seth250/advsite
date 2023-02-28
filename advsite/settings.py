@@ -125,7 +125,43 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
+# Media files (User files)
+# https://docs.djangoproject.com/en/4.1/topics/files/
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# LOGGING SETTINGS
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{asctime}  [{levelname}]  [{module}]  {process:d}  {thread:d}  {lineno}  {message}',
+            'style': '{',
+            'datefmt': '%Y-%m-%d %H:%M:%S'
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'root': {
+            'level': 'INFO',
+            'handlers': ['console'],
+            'propagate': False
+        }
+    }
+}
