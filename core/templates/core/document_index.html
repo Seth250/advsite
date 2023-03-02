@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block title %} Adverity Challenge &mdash; Index {% endblock title %}
+
+{% block content %}
+  <div class="collection">
+    <header class="collection__header">
+      <h2>Collections</h2>
+      <form method="POST" class="collection__form">
+        {% csrf_token %}
+        <button type="submit" class="collection__btn">Fetch</button>
+      </form>
+    </header>
+    <div class="document-container">
+      {% for document in document_list %}
+        <a class="document-link" href="{% url 'core:document-detail' filename=document.filename %}">
+          {{ document.created_at }}
+        </a>
+      {% empty %}
+        <div class="empty-document-list">
+          <p>No Dataset Yet!</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

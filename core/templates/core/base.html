@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="{% static 'core/css/main.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div id="loader" class="loader loader--hidden">
+        <div class="loader__ring"></div>
+        <p class="loader__text">Loading, please wait...</p>
+      </div>
+      <header class="header">
+        <h1>
+          <a class="header__logo" href="/">Star wars Explorer</a>
+        </h1>
+        <nav class="nav-bar">
+          <ul class="nav-bar__items">
+            <li>
+              <a class="nav-bar__link {% if request.path == '/' %} nav-bar__link--active {% endif %}"
+                 href="/">
+                Collections
+              </a>
+            </li>
+          </ul>     
+        </nav>
+      </header>
+      <main role="main" class="main">
+        {% block content %}
+        {% endblock content %}
+      </main>
+    </div>
+
+    <script src="{% static 'core/js/main.js' %}"></script>
+  </body>
+</html>
