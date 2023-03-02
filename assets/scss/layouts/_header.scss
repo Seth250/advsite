@@ -1,0 +1,18 @@
+@use '../abstracts';
+
+
+.header {
+  padding: 0.875em 4%;
+  background-color: abstracts.$pry-blue;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 0.0625em 0.25em 0 rgba(0, 0, 0, 0.7);
+
+  @include abstracts.breakpoint(mobile) {
+    justify-content: space-between;
+  }
+
+  &__logo {
+    color: abstracts.$pry-white;
+  }
+}

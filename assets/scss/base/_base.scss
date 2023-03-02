@@ -1,0 +1,19 @@
+@use '../abstracts';
+
+
+:root {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1rem;
+
+  @media screen and (max-width: 480px) {
+    font-size: 0.75rem;
+  }
+}
+
+.wrapper {
+  position: relative;
+  background: abstracts.$sec-white;
+  min-height: 100vh;
+}

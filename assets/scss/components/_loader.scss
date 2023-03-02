@@ -1,0 +1,41 @@
+@use '../abstracts';
+
+
+.loader {
+  @include abstracts.flex-justify-items-center;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  &--hidden {
+    display: none;
+  }
+
+  &__ring {
+    border: 0.5em solid rgb(211, 211, 211);
+    border-left-color: abstracts.$pry-blue;
+    border-radius: 50%;
+    width: 7em;
+    height: 7em;
+    animation: spin 1s linear infinite;
+  }
+
+  &__text {
+    margin-top: 1.75em;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    color: abstracts.$sec-white;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}

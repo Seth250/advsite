@@ -1,0 +1,22 @@
+@use '../abstracts';
+
+body {
+  font-family: abstracts.$font-stack;
+}
+
+input, button {
+  font-family: inherit;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h1, h2 {
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}

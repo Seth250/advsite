@@ -1,0 +1,30 @@
+@use '../abstracts';
+
+
+.nav-bar {
+  @include abstracts.breakpoint(tablet-portrait-up) {
+    margin-left: 15%;
+  }
+
+  &__items {
+    display: flex;
+
+    li {
+      list-style-type: none;
+    }
+  }
+
+  &__link {
+    color: abstracts.$pry-white;
+    transition: color 0.2s ease-in;
+
+    &--active {
+      color: abstracts.$pry-yellow;
+      font-weight: 500;
+    }
+
+    &:hover {
+      color: abstracts.$pry-yellow;
+    }
+  }
+}

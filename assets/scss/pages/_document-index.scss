@@ -1,0 +1,61 @@
+@use '../abstracts';
+
+
+.collection {
+  width: 100%;
+  max-width: 80rem;
+
+  &__header {
+    display: flex;
+    align-items: center;
+  }
+
+  &__form {
+    margin-left: 1em;
+  }
+
+  &__btn {
+    border: 1px solid transparent;
+    color: abstracts.$sec-white;
+    background-color: abstracts.$sec-blue;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding: 0.5em 1.25em;
+    border-radius: abstracts.$pry-border-radius;
+    transition: color 0.25s, background-color 0.25s;
+
+    &:hover {
+      color: abstracts.$pry-white;
+      background-color: abstracts.$pry-blue;
+    }
+  }
+}
+
+.document-container {
+  padding: 1em 0;
+}
+
+.document-link {
+  display: block;
+  border: 1px solid lightgrey;
+  border-radius: abstracts.$sec-border-radius;
+  color: abstracts.$pry-blue;
+  background-color: abstracts.$pry-white;
+  font-weight: 500;
+  padding: 1em 1.25em;
+  margin-bottom: 1em;
+  box-shadow: 0 0.03rem 0.1rem 0 rgba(0, 0, 0, 0.4);
+  transition: color 0.2s, background-color 0.2s;
+
+  &:hover {
+    color: abstracts.$sec-white;
+    background-color: abstracts.$sec-blue;
+    border-color: transparent;
+  }
+}
+
+.empty-document-list {
+  padding: 1em 0;
+  text-align: center;
+  font-size: 1.25rem;
+}
