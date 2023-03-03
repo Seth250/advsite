@@ -10,6 +10,8 @@ from django.shortcuts import redirect, render
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView, View
 
+import petl as etl
+
 from core.models import CSVDocument
 from core.utils import ETLPipeline
 
@@ -31,9 +33,9 @@ class DocumentIndexView(AjaxCheckMixin, ListView):
         return CSVDocument.objects.all()
 
     def post(self, request: HttpRequest, *args, **kwargs):
-        etl = ETLPipeline()
-        table = etl.extract_and_transform()
-        document = etl.load(table)
+        etl_pipeline = ETLPipeline()
+        table = etl_pipeline.extract_and_transform()
+        document = etl_pipeline.load(table)
 
         if self.is_ajax(request):
             return JsonResponse(document.to_dict())
@@ -92,3 +94,46 @@ class DocumentDetailView(AjaxCheckMixin, View):
         }
 
         return render(request, 'core/document_detail.html', context=context)
+
+
+class DocumentValueCountView(AjaxCheckMixin, View):
+
+    def get_object(self):
+        filename: str | None = self.kwargs.get('filename')
+
+        try:
+            return CSVDocument.objects.get(filename=filename)
+        except CSVDocument.DoesNotExist:
+            raise Http404('No CSVDocument matches the given query.')
+
+    def get(self, request: HttpRequest, *args, **kwargs):
+        obj = self.get_object()
+
+        table = etl.fromcsv(obj.filepath)
+
+        fields = request.GET.get('fields', [])
+        if not fields:
+            fields = ['name']
+        else:
+            fields = ''.join(fields).split(',')
+
+        value_counts = etl.valuecounts(table, *fields)
+
+        header = etl.header(value_counts)
+        results = list(etl.data(value_counts))
+
+        if self.is_ajax(request):
+            data = {
+                'header': header,
+                'results': results
+            }
+            return JsonResponse(data)
+
+        context = {
+            'filename': obj.filename,
+            'fields': etl.header(table),
+            'header': header,
+            'results': results
+        }
+
+        return render(request, 'core/document_value_count.html', context=context)

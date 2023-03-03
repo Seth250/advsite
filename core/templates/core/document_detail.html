@@ -13,7 +13,9 @@
         <tr class="table__row">
           {% for field in header %}
             <th class="table__header">
-              <a href="/">{{ field }}</a>
+              <a href="{% url 'core:document-value-count' filename=filename %}?fields={{ field }}">
+                {{ field }}
+              </a>
             </th>
           {% endfor %}
         </tr>

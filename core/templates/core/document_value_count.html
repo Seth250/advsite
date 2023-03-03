@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+
+{% block title %}File {{ filename }} &mdash; Count {% endblock title %}
+
+{% block content %}
+  <div class="table-container">
+    <header>
+      <h2>{{ filename }}</h2>
+    </header>
+
+    <div class="tally">
+      {% for field in fields %}
+        <button
+          type="button"
+          class="tally__btn {% if field in header %} tally__btn--selected {% endif %}"
+        >
+          {{ field }}
+        </button>
+      {% endfor %}
+      <form class="tally__form">
+        <button type="submit">Get Count</button>
+      </form>
+    </div>
+
+    <table class="table">
+      <thead id="document-table-head">
+        <tr class="table__row">
+          {% for field in header %}
+            <th class="table__header">{{ field }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+
+      <tbody id="document-table-body">
+        {% for row in results %}
+          <tr class="table__row">
+            {% for column in row %}
+              <td>{{ column }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}
