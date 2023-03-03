@@ -17,3 +17,9 @@
 ![advsite_image4](/screenshots/advsite_img4.png)
 
 ![advsite_image5](/screenshots/advsite_img5.png)
+
+
+### Possible Improvements
+- Make the UI better and more consistent
+- Write tests where possible
+- Configure NGINX to serve static files
